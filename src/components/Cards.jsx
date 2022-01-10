@@ -1,3 +1,4 @@
+import React from 'react';
 const Cards = ({ img, name, email }) => {
   return (
     <div className="card">
