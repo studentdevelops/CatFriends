@@ -6,5 +6,5 @@ It will display the name of the cat and the contact details of the owner for ado
 
 
 How does it work?
-The app contains a smart component which stores the required states for the app.
+The App uses react hooks to store the required states.
 The names, contact details and image is fetched from jsonplaceholder and images are fetched from Robohash.org
