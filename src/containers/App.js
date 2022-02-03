@@ -1,30 +1,37 @@
 import "./App.css";
 import Cards from "../components/Cards";
 import Input from "../components/Input";
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import ErrorBoundry from "../components/ErrorBoundry";
 
-const App = () => {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cats: [],
+      searchField: "",
+    };
+  }
 
-  const [cats, setCats] = useState([]);
-  const [searchField, setSearchField] = useState("");
-
-  useEffect(() => {
+  componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
-      .then((catList) => setCats(catList));
-  }, []);
+      .then((catList) => this.setState({ cats: catList }));
+  }
 
-  const onSearchChange = (e) => {
-    setSearchField(e.target.value)
+  onSearchChange = (e) => {
+    this.setState({ searchField: e.target.value });
   };
 
+  render() {
+  const {cats, searchField} = this.state;
   const filteredCats = cats.filter((cats) => {
     return cats.name
       .trim()
       .toLowerCase()
       .includes(searchField.trim().toLowerCase());
   });
+
   const catList = filteredCats.map((cat, i) => {
     return (
       <Cards
@@ -36,18 +43,18 @@ const App = () => {
       />
     );
   });
-
-  return (
-    <ErrorBoundry>
-      <div className="App">
-        <div className="header">
-          <h3>Adopt A Cat</h3>
-          <Input onSearchChange={onSearchChange} />
+    return (
+      <ErrorBoundry>
+        <div className="App">
+          <div className="header">
+            <h3>Adopt A Cat</h3>
+            <Input onSearchChange={this.onSearchChange} />
+          </div>
+          <div className="Cards">{catList}</div>
         </div>
-        <div className="Cards">{catList}</div>
-      </div>
-    </ErrorBoundry>
-  );
-};
+      </ErrorBoundry>
+    );
+  }
+}
 
 export default App;
