@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { requestCats, setSearchField } from "../actions";
 
 const mapStateToProps = (state) => {
-  // states from reducer.js go here
+  // states go here
   return {
     searchField: state.searchCats.searchField,
     cats: state.requestCats.cats,
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  // methods/actions go here
+  // actions go here
   return {
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
     onRequestCats: () => dispatch(requestCats())
@@ -30,6 +30,7 @@ class App extends Component {
   //   super();
   //   this.state = {
   //     cats: [],
+  //     searchField:''
   //   };
   // }
 
@@ -71,5 +72,7 @@ class App extends Component {
     );
   }
 }
-
+// connecting states and actions to app via props using connect method and 
+// the actions and state gets passed as parameters in mapStateToProps and map 
+// mapDispatchToProps
 export default connect(mapStateToProps, mapDispatchToProps)(App);

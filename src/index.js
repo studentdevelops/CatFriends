@@ -8,7 +8,7 @@ import { applyMiddleware, createStore, combineReducers } from "redux";
 import { searchCats, requestCats } from "./reducer";
 import ThunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
-
+// reducers go in createStore then gets passed down to components as props
 const logger = createLogger();
 const rootReducers = combineReducers({ searchCats, requestCats });
 const store = createStore(
