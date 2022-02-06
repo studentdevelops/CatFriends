@@ -7,19 +7,22 @@ import { Provider } from "react-redux";
 import { applyMiddleware, createStore, combineReducers } from "redux";
 import { searchCats, requestCats } from "./reducer";
 import ThunkMiddleware from "redux-thunk";
-import { createLogger } from "redux-logger";
+
+// import { createLogger } from "redux-logger";
+
 // reducers go in createStore then gets passed down to components as props
-const logger = createLogger();
-const rootReducers = combineReducers({ searchCats, requestCats });
+// const logger = createLogger();
+
 // const store = createStore(
 //   rootReducers,
 //   applyMiddleware(ThunkMiddleware, logger)
 // );
 
-const store = createStore(
-  rootReducers,
-  applyMiddleware(ThunkMiddleware)
-);
+const rootReducers = combineReducers({ searchCats, requestCats });
+
+const store = createStore(rootReducers, applyMiddleware(ThunkMiddleware));
+
+console.log(store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
